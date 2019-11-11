@@ -1,5 +1,14 @@
-exports.showIndex = function(req, res){
-    res.render("index")
+const Entry = require('../models/Entry')
+
+exports.showIndex = async function(req, res){
+    //get entries from database
+    //need to use async and await together
+    const entries = await Entry.find() //returns all records  like Select *
+    console.log(entries)
+
+    
+    res.render('index', {entries})
+
 }
 
 exports.showNewEntry = function(req, res){
@@ -13,11 +22,26 @@ exports.addNewEntry = function(req, res){
         return
     }
     
-    req.entries.push({
+    /*req.entries.push({
         title: req.body.title,
         body: req.body.body,
         published: new Date()   
-        })
+        })*/
+
+const newEntry = new Entry({
+    title: req.body.title,
+    body: req.body.body,
+    published: new Date()  
+})
+
+
+newEntry.save()
 
     res.redirect('/') 
+}
+
+exports.deleteEntry = async function(req, res){
+    const entry = await Entry.findById(req.params.id)
+    entry.remove()
+    res.redirect('/')    
 }
