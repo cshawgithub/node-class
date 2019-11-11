@@ -2,6 +2,8 @@ const http = require('http') //imports the http module from Node
 const express = require('express')  // imports the express module 
 const app = express()
 
+require('dotenv').config({ path: '.env' })
+
 app.get('/', function(req, res){
   res.end('Home Page')
 
@@ -24,5 +26,5 @@ app.use(function(req, res){
   }) 
 
 const server = http.createServer(app)
-server.listen(3000)
+server.listen(process.env.PORT)
 
