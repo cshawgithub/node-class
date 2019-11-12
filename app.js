@@ -12,6 +12,7 @@ require('dotenv').config({ path: '.env' })
 //after app gets started, connect to db
 //mongoose.connect('mongodb://localhost:27017/node-class', { useNewUrlParser: true, useUnifiedTopology: true})
 
+
 mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true})
 
 

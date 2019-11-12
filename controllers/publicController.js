@@ -3,8 +3,10 @@ const Entry = require('../models/Entry')
 exports.showIndex = async function(req, res){
     //get entries from database
     //need to use async and await together
+
     const entries = await Entry.find() //returns all records  like Select *
-    console.log(entries)
+
+    //console.log(entries)
 
     
     res.render('index', {entries})
